@@ -1,0 +1,12 @@
+{
+  "name": "app_um",
+  "displayName": "app_um",
+  "expo": {
+    "name": "app_um",
+    "slug": "app_um",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
