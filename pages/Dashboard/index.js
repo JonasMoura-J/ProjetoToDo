@@ -1,58 +1,61 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text } from 'react-native';
 
-
-import { Container, Button, ButtonText} from './styles'
-
+import { Container } from './styles'
 
 import ProgressCircle from 'react-native-progress-circle'
 
-
 import api from '../../services/api';
 
+import { useIsFocused } from '@react-navigation/native';
 
 const Dashboard = () => {
 
 
   const [tasks, setTasks] = useState([]);
-  const [tasks2, setTasks2] = useState([]);
-  const [cont, setCont] = useState(0);
-  const [cont2, setCont2] = useState(0);
- 
+  const [percentual, setPercentual] = useState(0);
+  const isFocused = useIsFocused();
+
+
   const loadTasks = async () => {
+
+    try {
       const response = await api.get("tarefas");
       // console.warn(response.data);
-      setTasks(response.data)
+      const tks = response.data;
+      setTasks(tks)
 
+      setPercentual(((tks.filter((t) => t.concluido).length / tks.length) * 100))
+
+    } catch (err) {
+      console.warn("Falha ao recuperar as tarefas.")
+    }
 
   }
 
 
+
   useEffect(() => {
     loadTasks();
-    setCont(tasks.length)
-    setCont2(tasks.filter((t) => t.concluido).length)
-  }, [tasks])
-
+    // console.warn(tasks.length)
+  }, [isFocused])
 
   return (
     <Container>
       <ProgressCircle
-        percent={(cont2/cont)*100}
+        percent={percentual}
         radius={100}
         borderWidth={30}
         color="tomato"
         shadowColor="#999"
         bgColor="#fff"
       >
-        <Text style={{ fontSize: 25 }}>{`${((cont2/cont)*100).toFixed(0)}%`}</Text>
+        <Text style={{ fontSize: 25 }}>{`${percentual.toFixed(2)}%`}</Text>
       </ProgressCircle>
     </Container>
 
 
-
   )
 };
-
 
 export default Dashboard;
