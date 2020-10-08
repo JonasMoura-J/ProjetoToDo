@@ -10,6 +10,10 @@ import api from '../../services/api';
 import { useIsFocused } from '@react-navigation/native';
 // import { useFocusEffect } from '@react-navigation/native';
 
+
+
+
+
 const Dashboard = () => {
 
   const focoPagina = useIsFocused();
@@ -44,14 +48,15 @@ const Dashboard = () => {
     <Container>
       <ProgressCircle
         percent={percentual}
-        radius={100}
-        borderWidth={30}
-        color="tomato"
+        radius={120}
+        borderWidth={20}
+        color={percentual===100? 'green': percentual>=50?'yellow':'tomato'}
         shadowColor="#999"
         bgColor="#fff"
       >
-        <Text style={{ fontSize: 25 }}>{`${percentual.toFixed(2)}%`}</Text>
+        <Text style={{ fontSize: 25 }}>{percentual == 100?'Concluído!':`${percentual.toFixed(0)}%`}</Text>
       </ProgressCircle>
+      
     </Container>
   )
 };

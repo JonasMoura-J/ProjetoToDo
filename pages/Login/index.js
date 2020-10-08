@@ -28,7 +28,7 @@ const Login = () => {
 
   return (
     <Container>
-      <Image source={logoImg} />
+      <Image source={logoImg}/>
       <Input
         value={email}
         placeholder="Email"
