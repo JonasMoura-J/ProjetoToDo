@@ -6,6 +6,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import Routes from './routes'
 
+
+
+
+
 export default function App() {
   return (
     <SafeAreaView style={{ flex: 1 }}>

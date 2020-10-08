@@ -4,6 +4,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import Tarefas from '../pages/Tarefas';
 import Dashboard from '../pages/Dashboard';
+import Login from '../pages/Login';
 
 
 const Tab = createBottomTabNavigator();
@@ -11,13 +12,26 @@ const Tab = createBottomTabNavigator();
 const AppRoutes = () => {
   return (
     <Tab.Navigator
-      initialRouteName="Dashboard"
+      initialRouteName="Login"
       tabBarOptions={
         {
           activeTintColor: 'tomato',
           inactiveTintColor: '#ccc'
         }
       }>
+        <Tab.Screen
+        name="Login"
+        component={Login}
+        options={
+          {
+            tabBarIcon: ({ color }) => (
+              <MaterialCommunityIcons
+                name="playlist-check"
+                color={color}
+                size={32} />
+            )
+          }
+        } />
       <Tab.Screen
         name="Tarefas"
         component={Tarefas}
